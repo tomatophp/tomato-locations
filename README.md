@@ -9,11 +9,6 @@ Database seeds for Locations plugin for TomatoPHP
 ```bash
 composer require tomatophp/tomato-locations
 ```
-after install use this command to publish assets and generate permissions
-
-```bash
-php artisan tomato-locations:install
-```
 
 ## Support
 

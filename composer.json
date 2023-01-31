@@ -1,0 +1,41 @@
+{
+    "name": "tomatophp/tomato-locations",
+    "type": "library",
+    "description": "Database seeds for Locations Module for VILT stack",
+    "keywords": [
+        "php",
+        "laravel",
+        "template"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TomatoPHP\\TomatoLocations\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TomatoPHP\\TomatoLocations\\TomatoLocationsServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Fady Mondy",
+            "email": "info@3x1.io"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "tomatophp/console-helpers": "^1.0",
+        "tomatophp/tomato-roles": "^1.0",
+        "tomatophp/tomato-admin": "^1.0",
+        "tomatophp/tomato-settings": "^1.0"
+    }
+}

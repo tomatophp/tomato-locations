@@ -15,7 +15,7 @@ class FillAllVars extends Migration
      */
     public function up()
     {
-        $sql = \Illuminate\Support\Facades\File::get(base_path('vendor/queents/tomato-locations/database/migrations') . '/../3x1.sql');
+        $sql = \Illuminate\Support\Facades\File::get(base_path('vendor/tomatophp/tomato-locations/database/migrations') . '/../3x1.sql');
         DB::connection()->getPdo()->exec($sql);
     }
 

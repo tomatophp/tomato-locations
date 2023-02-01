@@ -1,11 +1,17 @@
 {
     "name": "tomatophp/tomato-locations",
     "type": "library",
-    "description": "Database seeds for Locations Module for VILT stack",
+    "description": "Database seeds for Locations plugin for TomatoPHP",
     "keywords": [
         "php",
         "laravel",
-        "template"
+        "tomatophp",
+        "splade",
+        "countires",
+        "cities",
+        "area",
+        "languages",
+        "currency"
     ],
     "license": "MIT",
     "autoload": {

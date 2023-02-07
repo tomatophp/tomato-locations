@@ -38,7 +38,6 @@ class TomatoLocationsInstall extends Command
     {
         $this->info('🍅 Publish Vendor Assets');
         $this->callSilent('optimize:clear');
-        $this->call('vendor:publish', ['--provider' => 'TomatoPHP\TomatoLocations\TomatoLocationsServiceProvider']);
         $this->artisanCommand(["migrate"]);
         $this->artisanCommand(["optimize:clear"]);
         $this->info('🍅 Tomato Locations installed successfully.');

@@ -1,14 +1,21 @@
-<x-splade-modal class="font-main">
-    <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.edit')}} {{trans('tomato-locations::global.country.single')}} #{{$model->id}}</h1>
-
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.edit')}} {{__('Country')}} #{{$model->id}}">
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.countries.update', $model->id)}}" method="post" :default="$model">
 
-        <x-splade-input name="name" type="text"  placeholder="{{trans('tomato-locations::global.country.name')}}" />
-        <x-splade-input name="code" type="text"  placeholder="{{trans('tomato-locations::global.country.code')}}" />
-        <x-splade-input name="phone" type="tel"  placeholder="{{trans('tomato-locations::global.country.phone')}}" />
-        <x-splade-input name="lat" type="text"  placeholder="{{trans('tomato-locations::global.country.lat')}}" />
-        <x-splade-input name="lang" type="text"  placeholder="{{trans('tomato-locations::global.country.lang')}}" />
+          <x-splade-input :label="__('Name')" name="name" type="text"  :placeholder="__('Name')" />
+          <x-splade-input :label="__('Code')" name="code" type="text"  :placeholder="__('Code')" />
+          <x-splade-input :label="__('Phone')" :placeholder="__('Phone')" type='tel' name="phone" />
+          <x-splade-input :label="__('Lat')" name="lat" type="text"  :placeholder="__('Lat')" />
+          <x-splade-input :label="__('Lang')" name="lang" type="text"  :placeholder="__('Lang')" />
 
-        <x-splade-submit label="{{trans('tomato-admin::global.crud.update')}} {{trans('tomato-locations::global.country.single')}}" :spinner="true" />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit  label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button danger :href="route('admin.countries.destroy', $model->id)"
+                                   confirm="{{trans('tomato-admin::global.crud.delete-confirm')}}"
+                                   confirm-text="{{trans('tomato-admin::global.crud.delete-confirm-text')}}"
+                                   confirm-button="{{trans('tomato-admin::global.crud.delete-confirm-button')}}"
+                                   cancel-button="{{trans('tomato-admin::global.crud.delete-confirm-cancel-button')}}"
+                                   method="delete"  label="{{__('Delete')}}" />
+            <x-tomato-admin-button secondary :href="route('admin.countries.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
-</x-splade-modal>
+</x-tomato-admin-container>

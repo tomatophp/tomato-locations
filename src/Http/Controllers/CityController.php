@@ -7,20 +7,30 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use TomatoPHP\TomatoPHP\Services\Tomato;
+use TomatoPHP\TomatoAdmin\Facade\Tomato;
+use TomatoPHP\TomatoLocations\Models\City;
+use TomatoPHP\TomatoLocations\Tables\CityTable;
 
 class CityController extends Controller
 {
+    public string $model;
+
+    public function __construct()
+    {
+        $this->model = City::class;
+    }
+
     /**
      * @param Request $request
-     * @return View
+     * @return View|JsonResponse
      */
-    public function index(Request $request): View
+    public function index(Request $request): View|JsonResponse
     {
         return Tomato::index(
             request: $request,
+            model: $this->model,
             view: 'tomato-locations::cities.index',
-            table: \TomatoPHP\TomatoLocations\Tables\CityTable::class,
+            table: CityTable::class
         );
     }
 
@@ -32,7 +42,7 @@ class CityController extends Controller
     {
         return Tomato::json(
             request: $request,
-            model: \TomatoPHP\TomatoLocations\Models\City::class,
+            model: $this->model,
         );
     }
 
@@ -47,26 +57,38 @@ class CityController extends Controller
     }
 
     /**
-     * @param \TomatoPHP\TomatoLocations\Http\Requests\City\CityStoreRequest $request
-     * @return RedirectResponse
+     * @param Request $request
+     * @return RedirectResponse|JsonResponse
      */
-    public function store(\TomatoPHP\TomatoLocations\Http\Requests\City\CityStoreRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse|JsonResponse
     {
         $response = Tomato::store(
             request: $request,
-            model: \TomatoPHP\TomatoLocations\Models\City::class,
-            message: trans('tomato-locations::global.city.message.store'),
+            model: $this->model,
+            validation: [
+                'name' => 'required|max:255|string',
+                'price' => 'nullable',
+                'shipping' => 'nullable',
+                'country_id' => 'required',
+                'lat' => 'nullable|max:255|string',
+                'lang' => 'nullable|max:255|string'
+            ],
+            message: __('City updated successfully'),
             redirect: 'admin.cities.index',
         );
 
-        return $response['redirect'];
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 
     /**
-     * @param \TomatoPHP\TomatoLocations\Models\City $model
-     * @return View
+     * @param \Modules\Locations\Entities\City $model
+     * @return View|JsonResponse
      */
-    public function show(\TomatoPHP\TomatoLocations\Models\City $model): View
+    public function show(City $model): View|JsonResponse
     {
         return Tomato::get(
             model: $model,
@@ -75,10 +97,10 @@ class CityController extends Controller
     }
 
     /**
-     * @param \TomatoPHP\TomatoLocations\Models\City $model
+     * @param \Modules\Locations\Entities\City $model
      * @return View
      */
-    public function edit(\TomatoPHP\TomatoLocations\Models\City $model): View
+    public function edit(City $model): View
     {
         return Tomato::get(
             model: $model,
@@ -87,32 +109,51 @@ class CityController extends Controller
     }
 
     /**
-     * @param \TomatoPHP\TomatoLocations\Http\Requests\City\CityUpdateRequest $request
-     * @param \TomatoPHP\TomatoLocations\Models\City $user
-     * @return RedirectResponse
+     * @param Request $request
+     * @param \Modules\Locations\Entities\City $model
+     * @return RedirectResponse|JsonResponse
      */
-    public function update(\TomatoPHP\TomatoLocations\Http\Requests\City\CityUpdateRequest $request, \TomatoPHP\TomatoLocations\Models\City $model): RedirectResponse
+    public function update(Request $request, City $model): RedirectResponse|JsonResponse
     {
         $response = Tomato::update(
             request: $request,
             model: $model,
-            message: trans('tomato-locations::global.city.message.update'),
+            validation: [
+                'name' => 'sometimes|max:255|string',
+                'price' => 'nullable',
+                'shipping' => 'nullable',
+                'country_id' => 'sometimes',
+                'lat' => 'nullable|max:255|string',
+                'lang' => 'nullable|max:255|string'
+            ],
+            message: __('City updated successfully'),
             redirect: 'admin.cities.index',
         );
 
-        return $response['redirect'];
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 
     /**
-     * @param \TomatoPHP\TomatoLocations\Models\City $model
-     * @return RedirectResponse
+     * @param \Modules\Locations\Entities\City $model
+     * @return RedirectResponse|JsonResponse
      */
-    public function destroy(\TomatoPHP\TomatoLocations\Models\City $model): RedirectResponse
+    public function destroy(City $model): RedirectResponse|JsonResponse
     {
-        return Tomato::destroy(
+        $response = Tomato::destroy(
             model: $model,
-            message: trans('tomato-locations::global.city.message.delete'),
+            message: __('City deleted successfully'),
             redirect: 'admin.cities.index',
         );
+
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 }
+

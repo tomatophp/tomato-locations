@@ -1,46 +1,21 @@
-<x-splade-modal class="font-main">
-    <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.view')}} {{trans('tomato-locations::global.language.single')}} #{{$model->id}}</h1>
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.view')}} {{__('languages')}} #{{$model->id}}">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-    <div class="flex flex-col space-y-4">
+        <x-tomato-admin-row :label="__('Iso')" :value="$model->iso" type="string" />
 
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{trans('tomato-locations::global.language.iso')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->iso}}
-                  </h3>
-              </div>
-          </div>
+        <x-tomato-admin-row :label="__('Name')" :value="$model->name" type="string" />
 
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{trans('tomato-locations::global.language.name')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->name}}
-                  </h3>
-              </div>
-          </div>
-
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{trans('tomato-locations::global.language.arabic')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->arabic}}
-                  </h3>
-              </div>
-          </div>
+        <x-tomato-admin-row :label="__('Arabic')" :value="$model->arabic" type="string" />
 
     </div>
-</x-splade-modal>
+    <div class="flex justify-start gap-2 pt-3">
+        <x-tomato-admin-button warning label="{{__('Edit')}}" :href="route('admin.languages.edit', $model->id)"/>
+        <x-tomato-admin-button danger :href="route('admin.languages.destroy', $model->id)"
+                               confirm="{{trans('tomato-admin::global.crud.delete-confirm')}}"
+                               confirm-text="{{trans('tomato-admin::global.crud.delete-confirm-text')}}"
+                               confirm-button="{{trans('tomato-admin::global.crud.delete-confirm-button')}}"
+                               cancel-button="{{trans('tomato-admin::global.crud.delete-confirm-cancel-button')}}"
+                               method="delete"  label="{{__('Delete')}}" />
+        <x-tomato-admin-button secondary :href="route('admin.languages.index')" label="{{__('Cancel')}}"/>
+    </div>
+</x-tomato-admin-container>

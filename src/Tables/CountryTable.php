@@ -2,10 +2,12 @@
 
 namespace TomatoPHP\TomatoLocations\Tables;
 
+
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
+use Illuminate\Database\Eloquent\Builder;
 
 class CountryTable extends AbstractTable
 {
@@ -14,9 +16,11 @@ class CountryTable extends AbstractTable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public Builder|null $query=null)
     {
-        //
+        if(!$query){
+            $this->query = \Modules\Locations\Entities\Country::query();
+        }
     }
 
     /**
@@ -36,7 +40,7 @@ class CountryTable extends AbstractTable
      */
     public function for()
     {
-        return \TomatoPHP\TomatoLocations\Models\Country::query();
+        return $this->query;
     }
 
     /**
@@ -48,20 +52,49 @@ class CountryTable extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(label: trans('tomato-admin::global.search'),columns: ['id','name','code','phone',])
+            ->withGlobalSearch(
+                label: trans('tomato-admin::global.search'),
+                columns: ['id','name','code','phone',]
+            )
             ->bulkAction(
                 label: trans('tomato-admin::global.crud.delete'),
-                each: fn (\TomatoPHP\TomatoLocations\Models\Country $model) => $model->delete(),
-                after: fn () => Toast::danger(trans('tomato-locations::global.country.message.delete'))->autoDismiss(2),
+                each: fn (\Modules\Locations\Entities\Country $model) => $model->delete(),
+                after: fn () => Toast::danger(__('Country Has Been Deleted'))->autoDismiss(2),
                 confirm: true
             )
-            ->export()
-            ->defaultSort('id')
-            ->column(key:"id",label: trans('tomato-locations::global.country.id'), sortable: true)
-            ->column(key:"name",label: trans('tomato-locations::global.country.name'), sortable: true)
-            ->column(key:"code",label: trans('tomato-locations::global.country.code'), sortable: true)
-            ->column(key:"phone",label: trans('tomato-locations::global.country.phone'), sortable: true)
+            ->defaultSort('id', 'desc')
+            ->column(
+                key: 'id',
+                label: __('Id'),
+                sortable: true
+            )
+            ->column(
+                key: 'name',
+                label: __('Name'),
+                sortable: true
+            )
+            ->column(
+                key: 'code',
+                label: __('Code'),
+                sortable: true
+            )
+            ->column(
+                key: 'phone',
+                label: __('Phone'),
+                sortable: true
+            )
+            ->column(
+                key: 'lat',
+                label: __('Lat'),
+                sortable: true
+            )
+            ->column(
+                key: 'lang',
+                label: __('Lang'),
+                sortable: true
+            )
             ->column(key: 'actions',label: trans('tomato-admin::global.crud.actions'))
-            ->paginate(15);
+            ->export()
+            ->paginate(10);
     }
 }

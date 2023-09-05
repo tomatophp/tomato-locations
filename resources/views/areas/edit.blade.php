@@ -3,7 +3,7 @@
 
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.areas.update', $model->id)}}" method="post" :default="$model">
 
-        <x-splade-select remote-url="/admin/cities/api" remote-root="model.data" option-label="name" option-value="id"  name="city_id" label="{{trans('tomato-locations::global.area.city')}}" choices/>
+        <x-splade-select remote-url="/admin/cities/api" remote-root="data" option-label="name" option-value="id"  name="city_id" label="{{trans('tomato-locations::global.area.city')}}" choices/>
 
 
         <x-splade-input name="name" type="text"  placeholder="{{trans('tomato-locations::global.area.name')}}" />

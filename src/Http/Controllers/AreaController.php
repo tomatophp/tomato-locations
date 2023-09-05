@@ -7,18 +7,29 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use TomatoPHP\TomatoPHP\Services\Tomato;
+use TomatoPHP\TomatoAdmin\Facade\Tomato;
+use TomatoPHP\TomatoLocations\Models\Area;
+use TomatoPHP\TomatoLocations\Tables\AreaTable;
 
 class AreaController extends Controller
 {
+    public string $model;
+
+    public function __construct()
+    {
+        $this->model = Area::class;
+    }
+
+
     /**
      * @param Request $request
      * @return View
      */
-    public function index(Request $request): View
+    public function index(Request $request): View|JsonResponse
     {
         return Tomato::index(
             request: $request,
+            model: $this->model,
             view: 'tomato-locations::areas.index',
             table: \TomatoPHP\TomatoLocations\Tables\AreaTable::class,
         );
@@ -50,7 +61,7 @@ class AreaController extends Controller
      * @param \TomatoPHP\TomatoLocations\Http\Requests\Area\AreaStoreRequest $request
      * @return RedirectResponse
      */
-    public function store(\TomatoPHP\TomatoLocations\Http\Requests\Area\AreaStoreRequest $request): RedirectResponse
+    public function store(\TomatoPHP\TomatoLocations\Http\Requests\Area\AreaStoreRequest $request): RedirectResponse|JsonResponse
     {
         $response = Tomato::store(
             request: $request,
@@ -59,14 +70,18 @@ class AreaController extends Controller
             redirect: 'admin.areas.index',
         );
 
-        return $response['redirect'];
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 
     /**
      * @param \TomatoPHP\TomatoLocations\Models\Area $model
      * @return View
      */
-    public function show(\TomatoPHP\TomatoLocations\Models\Area $model): View
+    public function show(\TomatoPHP\TomatoLocations\Models\Area $model): View|JsonResponse
     {
         return Tomato::get(
             model: $model,
@@ -91,7 +106,7 @@ class AreaController extends Controller
      * @param \TomatoPHP\TomatoLocations\Models\Area $user
      * @return RedirectResponse
      */
-    public function update(\TomatoPHP\TomatoLocations\Http\Requests\Area\AreaUpdateRequest $request, \TomatoPHP\TomatoLocations\Models\Area $model): RedirectResponse
+    public function update(\TomatoPHP\TomatoLocations\Http\Requests\Area\AreaUpdateRequest $request, \TomatoPHP\TomatoLocations\Models\Area $model): RedirectResponse|JsonResponse
     {
         $response = Tomato::update(
             request: $request,
@@ -100,19 +115,29 @@ class AreaController extends Controller
             redirect: 'admin.areas.index',
         );
 
-        return $response['redirect'];
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 
     /**
      * @param \TomatoPHP\TomatoLocations\Models\Area $model
      * @return RedirectResponse
      */
-    public function destroy(\TomatoPHP\TomatoLocations\Models\Area $model): RedirectResponse
+    public function destroy(\TomatoPHP\TomatoLocations\Models\Area $model): RedirectResponse|JsonResponse
     {
-        return Tomato::destroy(
+        $response = Tomato::destroy(
             model: $model,
             message: trans('tomato-locations::global.area.message.delete'),
             redirect: 'admin.areas.index',
         );
+
+        if ($response instanceof JsonResponse) {
+            return $response;
+        }
+
+        return $response->redirect;
     }
 }

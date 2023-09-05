@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use ProtoneMedia\Splade\SpladeTable;
+use TomatoPHP\TomatoLocations\Models\Area;
+use Illuminate\Database\Eloquent\Builder;
 
 class AreaTable extends AbstractTable
 {
@@ -14,9 +16,11 @@ class AreaTable extends AbstractTable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public Builder|null $query = null)
     {
-        //
+        if (! $query) {
+            $this->query = Area::query();
+        }
     }
 
     /**
@@ -36,7 +40,7 @@ class AreaTable extends AbstractTable
      */
     public function for()
     {
-        return \TomatoPHP\TomatoLocations\Models\Area::query();
+        return $this->query;
     }
 
     /**

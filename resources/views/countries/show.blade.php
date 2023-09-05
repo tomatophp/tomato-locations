@@ -1,72 +1,25 @@
-<x-splade-modal class="font-main">
-    <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.view')}} {{trans('tomato-locations::global.country.single')}} #{{$model->id}}</h1>
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.view')}} {{__('countries')}} #{{$model->id}}">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        
+          <x-tomato-admin-row :label="__('Name')" :value="$model->name" type="string" />
 
-    <div class="flex flex-col space-y-4">
+          <x-tomato-admin-row :label="__('Code')" :value="$model->code" type="string" />
 
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{trans('tomato-locations::global.country.name')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->name}}
-                  </h3>
-              </div>
-          </div>
+          <x-tomato-admin-row :label="__('Phone')" :value="$model->phone" type="tel" />
 
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{trans('tomato-locations::global.country.code')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->code}}
-                  </h3>
-              </div>
-          </div>
+          <x-tomato-admin-row :label="__('Lat')" :value="$model->lat" type="string" />
 
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{trans('tomato-locations::global.country.phone')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->phone}}
-                  </h3>
-              </div>
-          </div>
-
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{trans('tomato-locations::global.country.lat')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->lat}}
-                  </h3>
-              </div>
-          </div>
-
-          <div class="flex justify-between">
-              <div>
-                  <h3 class="text-lg font-bold">
-                      {{trans('tomato-locations::global.country.lang')}}
-                  </h3>
-              </div>
-              <div>
-                  <h3 class="text-lg">
-                      {{ $model->lang}}
-                  </h3>
-              </div>
-          </div>
+          <x-tomato-admin-row :label="__('Lang')" :value="$model->lang" type="string" />
 
     </div>
-</x-splade-modal>
+    <div class="flex justify-start gap-2 pt-3">
+        <x-tomato-admin-button warning label="{{__('Edit')}}" :href="route('admin.countries.edit', $model->id)"/>
+        <x-tomato-admin-button danger :href="route('admin.countries.destroy', $model->id)"
+                               confirm="{{trans('tomato-admin::global.crud.delete-confirm')}}"
+                               confirm-text="{{trans('tomato-admin::global.crud.delete-confirm-text')}}"
+                               confirm-button="{{trans('tomato-admin::global.crud.delete-confirm-button')}}"
+                               cancel-button="{{trans('tomato-admin::global.crud.delete-confirm-cancel-button')}}"
+                               method="delete"  label="{{__('Delete')}}" />
+        <x-tomato-admin-button secondary :href="route('admin.countries.index')" label="{{__('Cancel')}}"/>
+    </div>
+</x-tomato-admin-container>

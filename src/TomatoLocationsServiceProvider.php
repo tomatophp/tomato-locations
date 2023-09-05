@@ -3,11 +3,13 @@
 namespace TomatoPHP\TomatoLocations;
 
 use Illuminate\Support\ServiceProvider;
+use TomatoPHP\TomatoAdmin\Facade\TomatoMenu;
 use TomatoPHP\TomatoLocations\Console\TomatoLocationsInstall;
 use TomatoPHP\TomatoLocations\Menus\LocationsMenu;
 use TomatoPHP\TomatoPHP\Services\Menu\TomatoMenuRegister;
 use TomatoPHP\TomatoRoles\Services\Permission;
 use TomatoPHP\TomatoRoles\Services\TomatoRoles;
+use TomatoPHP\TomatoAdmin\Services\Contracts\Menu;
 
 
 class TomatoLocationsServiceProvider extends ServiceProvider
@@ -16,45 +18,43 @@ class TomatoLocationsServiceProvider extends ServiceProvider
     {
         //Register generate command
         $this->commands([
-           TomatoLocationsInstall::class,
+            TomatoLocationsInstall::class,
         ]);
 
         //Register Config file
-        $this->mergeConfigFrom(__DIR__.'/../config/tomato-locations.php', 'tomato-locations');
+        $this->mergeConfigFrom(__DIR__ . '/../config/tomato-locations.php', 'tomato-locations');
 
         //Publish Config
         $this->publishes([
-           __DIR__.'/../config/tomato-locations.php' => config_path('tomato-locations.php'),
+            __DIR__ . '/../config/tomato-locations.php' => config_path('tomato-locations.php'),
         ], 'tomato-locations-config');
 
         //Register Migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         //Publish Migrations
         $this->publishes([
-           __DIR__.'/../database/migrations' => database_path('migrations'),
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
         ], 'tomato-locations-migrations');
 
         //Register views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'tomato-locations');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'tomato-locations');
 
         //Publish Views
         $this->publishes([
-           __DIR__.'/../resources/views' => resource_path('views/vendor/tomato-locations'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/tomato-locations'),
         ], 'tomato-locations-views');
 
         //Register Langs
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tomato-locations');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'tomato-locations');
 
         //Publish Lang
         $this->publishes([
-           __DIR__.'/../resources/lang' => app_path('lang/vendor/tomato-locations'),
+            __DIR__ . '/../resources/lang' => app_path('lang/vendor/tomato-locations'),
         ], 'tomato-locations-lang');
 
         //Register Routes
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-
-        TomatoMenuRegister::registerMenu(LocationsMenu::class);
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         $this->registerPermissions();
     }
@@ -80,6 +80,43 @@ class TomatoLocationsServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //you boot methods here
+        $this->bootMenu();
+    }
+
+    protected function bootMenu(): void
+    {
+        TomatoMenu::register([
+                Menu::make()
+                    ->group(__('Locations'))
+                    ->label(trans('tomato-locations::global.country.title'))
+                    ->icon("bx bxs-flag")
+                    ->route("admin.countries.index"),
+                Menu::make()
+                    ->group(__('Locations'))
+                    ->label(trans('tomato-locations::global.city.title'))
+                    ->icon("bx bxs-city")
+                    ->route("admin.cities.index"),
+                Menu::make()
+                    ->group(__('Locations'))
+                    ->label(trans('tomato-locations::global.area.title'))
+                    ->icon("bx bxs-map")
+                    ->route("admin.areas.index"),
+                Menu::make()
+                    ->group(__('Locations'))
+                    ->label(trans('tomato-locations::global.language.title'))
+                    ->icon("bx bx-globe")
+                    ->route("admin.languages.index"),
+                Menu::make()
+                    ->group(__('Locations'))
+                    ->label(trans('tomato-locations::global.currency.title'))
+                    ->icon("bx bx-money")
+                    ->route("admin.currencies.index"),
+                Menu::make()
+                    ->group(__('Locations'))
+                    ->label(trans('tomato-locations::global.settings.title'))
+                    ->icon("bx bxs-cog")
+                    ->route("admin.settings.locations.index")
+            ]
+        );
     }
 }

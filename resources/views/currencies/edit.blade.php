@@ -1,12 +1,19 @@
-<x-splade-modal class="font-main">
-    <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.edit')}} Currency #{{$model->id}}</h1>
-
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.edit')}} {{__('Currency')}} #{{$model->id}}">
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.currencies.update', $model->id)}}" method="post" :default="$model">
 
-        <x-splade-input name="arabic" type="text"  placeholder="{{trans('tomato-locations::global.currency.arabic')}}" />
-        <x-splade-input name="name" type="text"  placeholder="{{trans('tomato-locations::global.currency.name')}}" />
-        <x-splade-input name="iso" type="text"  placeholder="{{trans('tomato-locations::global.currency.iso')}}" />
+        <x-splade-input :label="__('Arabic')" name="arabic" type="text"  :placeholder="__('Arabic')" />
+        <x-splade-input :label="__('Name')" name="name" type="text"  :placeholder="__('Name')" />
+        <x-splade-input :label="__('Iso')" name="iso" type="text"  :placeholder="__('Iso')" />
 
-        <x-splade-submit label="{{trans('tomato-admin::global.crud.update')}} {{trans('tomato-locations::global.currency.single')}}" :spinner="true" />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit  label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button danger :href="route('admin.currencies.destroy', $model->id)"
+                                   confirm="{{trans('tomato-admin::global.crud.delete-confirm')}}"
+                                   confirm-text="{{trans('tomato-admin::global.crud.delete-confirm-text')}}"
+                                   confirm-button="{{trans('tomato-admin::global.crud.delete-confirm-button')}}"
+                                   cancel-button="{{trans('tomato-admin::global.crud.delete-confirm-cancel-button')}}"
+                                   method="delete"  label="{{__('Delete')}}" />
+            <x-tomato-admin-button secondary :href="route('admin.currencies.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
-</x-splade-modal>
+</x-tomato-admin-container>

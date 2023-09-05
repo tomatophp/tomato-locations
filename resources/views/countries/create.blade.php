@@ -1,14 +1,15 @@
-<x-splade-modal class="font-main">
-    <h1 class="text-2xl font-bold mb-4">{{trans('tomato-admin::global.crud.create')}} {{trans('tomato-locations::global.country.single')}}</h1>
-
+<x-tomato-admin-container label="{{trans('tomato-admin::global.crud.create')}} {{__('Country')}}">
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.countries.store')}}" method="post">
 
-          <x-splade-input name="name" type="text"  placeholder="{{trans('tomato-locations::global.country.name')}}" />
-          <x-splade-input name="code" type="text"  placeholder="{{trans('tomato-locations::global.country.code')}}" />
-          <x-splade-input name="phone" type="tel"  placeholder="{{trans('tomato-locations::global.country.phone')}}" />
-          <x-splade-input name="lat" type="text"  placeholder="{{trans('tomato-locations::global.country.lat')}}" />
-          <x-splade-input name="lang" type="text"  placeholder="{{trans('tomato-locations::global.country.lang')}}" />
+          <x-splade-input :label="__('Name')" name="name" type="text"  :placeholder="__('Name')" />
+          <x-splade-input :label="__('Code')" name="code" type="text"  :placeholder="__('Code')" />
+          <x-splade-input :label="__('Phone')" :placeholder="__('Phone')" type='tel' name="phone" />
+          <x-splade-input :label="__('Lat')" name="lat" type="text"  :placeholder="__('Lat')" />
+          <x-splade-input :label="__('Lang')" name="lang" type="text"  :placeholder="__('Lang')" />
 
-        <x-splade-submit label="{{trans('tomato-admin::global.crud.create-new')}} {{trans('tomato-locations::global.country.single')}}" :spinner="true" />
+        <div class="flex justify-start gap-2 pt-3">
+            <x-tomato-admin-submit  label="{{__('Save')}}" :spinner="true" />
+            <x-tomato-admin-button secondary :href="route('admin.countries.index')" label="{{__('Cancel')}}"/>
+        </div>
     </x-splade-form>
-</x-splade-modal>
+</x-tomato-admin-container>

@@ -2,6 +2,7 @@
 
 namespace TomatoPHP\TomatoLocations\Tables;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -14,9 +15,11 @@ class CityTable extends AbstractTable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public Builder|null $query = null)
     {
-        //
+        if (! $query) {
+            $this->query = \TomatoPHP\TomatoLocations\Models\City::query();
+        }
     }
 
     /**
@@ -36,7 +39,7 @@ class CityTable extends AbstractTable
      */
     public function for()
     {
-        return \TomatoPHP\TomatoLocations\Models\City::query();
+        return $this->query;
     }
 
     /**

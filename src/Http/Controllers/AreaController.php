@@ -32,6 +32,9 @@ class AreaController extends Controller
             model: $this->model,
             view: 'tomato-locations::areas.index',
             table: \TomatoPHP\TomatoLocations\Tables\AreaTable::class,
+            filters: [
+                "city_id"
+            ]
         );
     }
 
@@ -41,9 +44,14 @@ class AreaController extends Controller
      */
     public function api(Request $request): JsonResponse
     {
+        $query = \TomatoPHP\TomatoLocations\Models\Area::query();
+        if($request->has('city_id') && !empty($request->get('city_id'))){
+            $query->where('city_id', $request->get('city_id'));
+        }
         return Tomato::json(
             request: $request,
             model: \TomatoPHP\TomatoLocations\Models\Area::class,
+            query: $query,
         );
     }
 

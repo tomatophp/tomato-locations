@@ -30,7 +30,10 @@ class CityController extends Controller
             request: $request,
             model: $this->model,
             view: 'tomato-locations::cities.index',
-            table: CityTable::class
+            table: CityTable::class,
+            filters: [
+                "country_id"
+            ]
         );
     }
 
@@ -40,9 +43,14 @@ class CityController extends Controller
      */
     public function api(Request $request): JsonResponse
     {
+        $query = \TomatoPHP\TomatoLocations\Models\City::query();
+        if($request->has('country_id') && !empty($request->get('country_id'))){
+            $query->where('country_id', $request->get('country_id'));
+        }
         return Tomato::json(
             request: $request,
             model: $this->model,
+            query: $query
         );
     }
 

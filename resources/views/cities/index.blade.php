@@ -11,13 +11,11 @@
     <div class="pb-12">
         <div class="mx-auto">
             <x-splade-table :for="$table" striped>
-                <x-splade-cell price>
-    <x-tomato-admin-row table type="number" :value="$item->price" />
-</x-splade-cell>
-<x-splade-cell shipping>
-    <x-tomato-admin-row table :value="$item->shipping" />
-</x-splade-cell>
-
+                <x-splade-cell country.name>
+                    <x-splade-link href="{{url('admin/cities?country_id='. $item->country?->id)}}">
+                        <x-tomato-admin-row table type="text" :value="$item->country?->name"  />
+                    </x-splade-link>
+                </x-splade-cell>
                 <x-splade-cell actions>
                     <div class="flex justify-start">
                         <x-tomato-admin-button success type="icon" title="{{trans('tomato-admin::global.crud.view')}}" modal :href="route('admin.cities.show', $item->id)">

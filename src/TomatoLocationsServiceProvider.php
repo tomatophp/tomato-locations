@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use TomatoPHP\TomatoAdmin\Facade\TomatoMenu;
 use TomatoPHP\TomatoLocations\Console\TomatoLocationsInstall;
 use TomatoPHP\TomatoLocations\Menus\LocationsMenu;
+use TomatoPHP\TomatoLocations\Views\Location;
 use TomatoPHP\TomatoPHP\Services\Menu\TomatoMenuRegister;
 use TomatoPHP\TomatoRoles\Services\Permission;
 use TomatoPHP\TomatoRoles\Services\TomatoRoles;
@@ -55,8 +56,13 @@ class TomatoLocationsServiceProvider extends ServiceProvider
 
         //Register Routes
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
 
         $this->registerPermissions();
+
+        $this->loadViewComponentsAs('tomato', [
+            Location::class
+        ]);
     }
 
 

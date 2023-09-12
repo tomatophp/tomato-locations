@@ -12,6 +12,11 @@
     <div class="pb-12" v-cloak>
         <div class="mx-auto">
             <x-splade-table :for="$table" striped>
+                <x-splade-cell city.name>
+                    <x-splade-link href="{{url('admin/areas?city_id='. $item->city?->id)}}">
+                        <x-tomato-admin-row table type="text" :value="$item->city?->name"  />
+                    </x-splade-link>
+                </x-splade-cell>
                 <x-splade-cell actions>
                     <div class="flex justify-start">
                         <x-tomato-admin-button success type="icon" title="{{trans('tomato-admin::global.crud.view')

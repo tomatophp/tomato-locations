@@ -24,5 +24,10 @@ class Language extends Model
     /**
      * @var array
      */
-    protected $fillable = ['iso', 'name', 'arabic', 'created_at', 'updated_at'];
+    protected $fillable = ['translations','is_activated','iso', 'name', 'arabic', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'translations' => 'json',
+        'is_activated' => 'boolean'
+    ];
 }

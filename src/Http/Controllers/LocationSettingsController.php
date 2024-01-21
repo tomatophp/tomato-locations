@@ -5,6 +5,7 @@ namespace TomatoPHP\TomatoLocations\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use TomatoPHP\TomatoLocations\Http\Requests\Settings\LocationsSettingsRequest;
+use TomatoPHP\TomatoLocations\Models\Country;
 use TomatoPHP\TomatoLocations\Settings\LocationsSettings;
 use TomatoPHP\TomatoSettings\Http\Requests\Settings\GoogleSettingsRequest;
 use TomatoPHP\TomatoSettings\Http\Requests\Settings\SiteSettingsRequest;

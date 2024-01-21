@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property integer $id
  * @property string $name
- * @property float $price
- * @property string $shipping
  * @property integer $country_id
  * @property string $lat
- * @property string $lang
+ * @property string $lng
+ * @property array $translations
+ * @property boolean $is_activated
  * @property string $created_at
  * @property string $updated_at
  */
@@ -28,8 +28,12 @@ class City extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'price', 'shipping', 'country_id', 'lat', 'lang', 'created_at', 'updated_at'];
+    protected $fillable = ['name','translations','is_activated', 'country_id', 'lat', 'lng', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'translations' => 'json',
+        'is_activated' => 'boolean'
+    ];
 
     /**
      * @return BelongsTo

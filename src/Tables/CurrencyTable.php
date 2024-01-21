@@ -58,8 +58,9 @@ class CurrencyTable extends AbstractTable
             ->export()
             ->defaultSort('id')
             ->column(key: "id",label: trans('tomato-locations::global.currency.id'), sortable: true)
-            ->column(key: "arabic",label: trans('tomato-locations::global.currency.arabic'), sortable: true)
             ->column(key: "name",label: trans('tomato-locations::global.currency.name'), sortable: true)
+            ->column(key: "symbol",label: __('Symbol'), sortable: true)
+            ->column(key: "exchange_rate",label: __('Exchange Rate'), sortable: true)
             ->column(key: "iso",label: trans('tomato-locations::global.currency.iso'), sortable: true)
             ->column(key: 'actions',label: trans('tomato-admin::global.crud.actions'))
             ->paginate(15);

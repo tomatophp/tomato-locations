@@ -24,5 +24,11 @@ class Currency extends Model
     /**
      * @var array
      */
-    protected $fillable = ['arabic', 'name', 'iso', 'created_at', 'updated_at'];
+    protected $fillable = ['translations','exchange_rate', 'symbol','is_activated','arabic', 'name', 'iso', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'translations' => 'json',
+        'is_activated' => 'boolean'
+    ];
+
 }

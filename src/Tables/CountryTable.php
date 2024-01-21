@@ -74,6 +74,11 @@ class CountryTable extends AbstractTable
                 sortable: true
             )
             ->column(
+                key: 'emoji',
+                label: __('Emoji'),
+                sortable: true
+            )
+            ->column(
                 key: 'code',
                 label: __('Code'),
                 sortable: true
@@ -89,8 +94,8 @@ class CountryTable extends AbstractTable
                 sortable: true
             )
             ->column(
-                key: 'lang',
-                label: __('Lang'),
+                key: 'lng',
+                label: __('Lng'),
                 sortable: true
             )
             ->column(key: 'actions',label: trans('tomato-admin::global.crud.actions'))

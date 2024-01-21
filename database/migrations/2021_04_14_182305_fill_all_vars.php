@@ -15,8 +15,20 @@ class FillAllVars extends Migration
      */
     public function up()
     {
-        $sql = \Illuminate\Support\Facades\File::get(base_path('vendor/tomatophp/tomato-locations/database/migrations') . '/../3x1.sql');
-        DB::connection()->getPdo()->exec($sql);
+        $countires = \Illuminate\Support\Facades\File::get(base_path('vendor/tomatophp/tomato-locations/database/data/countries.sql'));
+        DB::connection()->getPdo()->exec($countires);
+
+        $citites = \Illuminate\Support\Facades\File::get(base_path('vendor/tomatophp/tomato-locations/database/data/cities.sql'));
+        DB::connection()->getPdo()->exec($citites);
+
+        $areas = \Illuminate\Support\Facades\File::get(base_path('vendor/tomatophp/tomato-locations/database/data/areas.sql'));
+        DB::connection()->getPdo()->exec($areas);
+
+        $currencies = \Illuminate\Support\Facades\File::get(base_path('vendor/tomatophp/tomato-locations/database/data/currencies.sql'));
+        DB::connection()->getPdo()->exec($currencies);
+
+        $languages = \Illuminate\Support\Facades\File::get(base_path('vendor/tomatophp/tomato-locations/database/data/languages.sql'));
+        DB::connection()->getPdo()->exec($languages);
     }
 
     /**

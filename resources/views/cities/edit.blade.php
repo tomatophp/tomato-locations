@@ -1,12 +1,23 @@
 <x-tomato-admin-container label="{{trans('tomato-admin::global.crud.edit')}} {{__('City')}} #{{$model->id}}">
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.cities.update', $model->id)}}" method="post" :default="$model">
-        
+
+        <x-splade-select
+            choices
+            :label="__('Country')"
+            name="country_id"
+            :placeholder="__('Country')"
+            remote-url="/admin/countries/api"
+            remote-root="data"
+            option-label="name"
+            option-value="id"
+        />
+
           <x-splade-input :label="__('Name')" name="name" type="text"  :placeholder="__('Name')" />
-          <x-splade-input :label="__('Price')" :placeholder="__('Price')" type='number' name="price" />
-          <x-tomato-admin-rich :label="__('Shipping')" name="shipping" :placeholder="__('Shipping')" autosize />
-          
-          <x-splade-input :label="__('Lat')" name="lat" type="text"  :placeholder="__('Lat')" />
-          <x-splade-input :label="__('Lang')" name="lang" type="text"  :placeholder="__('Lang')" />
+
+        <x-splade-input :label="__('Lat')" name="lat" type="number"  :placeholder="__('Lat')" />
+        <x-splade-input :label="__('Lng')" name="lng" type="number"  :placeholder="__('Lng')" />
+
+        <x-splade-checkbox :label="__('Is Active')" name="is_active" />
 
         <div class="flex justify-start gap-2 pt-3">
             <x-tomato-admin-submit  label="{{__('Save')}}" :spinner="true" />

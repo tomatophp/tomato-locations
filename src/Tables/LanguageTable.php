@@ -60,7 +60,6 @@ class LanguageTable extends AbstractTable
             ->column(key: 'id',label: trans('tomato-locations::global.language.id'), sortable: true)
             ->column(key: 'iso',label: trans('tomato-locations::global.language.iso'), sortable: true)
             ->column(key: 'name',label: trans('tomato-locations::global.language.name'), sortable: true)
-            ->column(key: 'arabic',label: trans('tomato-locations::global.language.arabic'), sortable: true)
             ->column(key: 'actions',label: trans('tomato-admin::global.crud.actions'))
             ->paginate(15);
     }

@@ -44,10 +44,13 @@ class AreaController extends Controller
      */
     public function api(Request $request): JsonResponse
     {
+        $request->validate([
+           'city_id' => 'required|integer|exists:cities,id'
+        ]);
+
         $query = \TomatoPHP\TomatoLocations\Models\Area::query();
-        if($request->has('city_id') && !empty($request->get('city_id'))){
-            $query->where('city_id', $request->get('city_id'));
-        }
+        $query->where('city_id', $request->get('city_id'));
+
         return Tomato::json(
             request: $request,
             model: \TomatoPHP\TomatoLocations\Models\Area::class,
@@ -103,6 +106,7 @@ class AreaController extends Controller
      */
     public function edit(\TomatoPHP\TomatoLocations\Models\Area $model): View
     {
+        $model->country_id = $model->city->country_id;
         return Tomato::get(
             model: $model,
             view: 'tomato-locations::areas.edit',

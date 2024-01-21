@@ -1,11 +1,13 @@
 <x-tomato-admin-container label="{{trans('tomato-admin::global.crud.view')}} {{__('currencies')}} #{{$model->id}}">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
-        <x-tomato-admin-row :label="__('Arabic')" :value="$model->arabic" type="string" />
-
         <x-tomato-admin-row :label="__('Name')" :value="$model->name" type="string" />
 
         <x-tomato-admin-row :label="__('Iso')" :value="$model->iso" type="string" />
+
+        <x-tomato-admin-row :label="__('Symbol')" :value="$model->symbol" type="string" />
+
+        <x-tomato-admin-row :label="__('Rate In USD')" :value="$model->exchange_rate" type="number" />
 
     </div>
     <div class="flex justify-start gap-2 pt-3">

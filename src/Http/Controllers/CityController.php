@@ -43,10 +43,14 @@ class CityController extends Controller
      */
     public function api(Request $request): JsonResponse
     {
+        $request->validate([
+            'country_id' => 'required|integer|exists:countries,id'
+        ]);
+
+
         $query = \TomatoPHP\TomatoLocations\Models\City::query();
-        if($request->has('country_id') && !empty($request->get('country_id'))){
-            $query->where('country_id', $request->get('country_id'));
-        }
+        $query->where('country_id', $request->get('country_id'));
+
         return Tomato::json(
             request: $request,
             model: $this->model,

@@ -4,8 +4,10 @@
           <x-splade-input :label="__('Name')" name="name" type="text"  :placeholder="__('Name')" />
           <x-splade-input :label="__('Code')" name="code" type="text"  :placeholder="__('Code')" />
           <x-splade-input :label="__('Phone')" :placeholder="__('Phone')" type='tel' name="phone" />
-          <x-splade-input :label="__('Lat')" name="lat" type="text"  :placeholder="__('Lat')" />
-          <x-splade-input :label="__('Lang')" name="lang" type="text"  :placeholder="__('Lang')" />
+          <x-splade-input :label="__('Lat')" name="lat" type="number"  :placeholder="__('Lat')" />
+          <x-splade-input :label="__('Lng')" name="lng" type="number"  :placeholder="__('Lng')" />
+
+        <x-splade-checkbox :label="__('Is Active')" name="is_active" />
 
         <div class="flex justify-start gap-2 pt-3">
             <x-tomato-admin-submit  label="{{__('Save')}}" :spinner="true" />

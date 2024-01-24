@@ -6,7 +6,7 @@ class LocationsSettings extends SettingsMigration
 {
     public function up(): void
     {
-        $this->migrator->add('local.local_country', 'Egypt');
+        $this->migrator->add('local.local_country', '65');
         $this->migrator->add('local.local_lang', 'Arabik');
         $this->migrator->add('local.local_currency', 'EGP');
         $this->migrator->add('local.local_phone', '+2');

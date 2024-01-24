@@ -8,7 +8,7 @@
             <x-tomato-settings-card :title="trans('tomato-locations::global.settings.card_title')" :description="trans('tomato-locations::global.settings.card_description')">
                 <x-splade-form method="post" action="{{route('admin.settings.locations.store')}}" class="mt-6 space-y-6" :default="$settings">
                     <div>
-                        <x-splade-select remote-url="/admin/countries/api" remote-root="data" option-label="name" option-value="name"  name="local_country" :label="trans('tomato-locations::global.settings.local_country')" choices relation/>
+                        <x-splade-select remote-url="/admin/countries/api" remote-root="data" option-label="name" option-value="id"  name="local_country" :label="trans('tomato-locations::global.settings.local_country')" choices relation/>
                         @if(config('tomato-settings.helpers'))
                             <div class="p-1">
                                 <small class="text-red-500"><code>setting('local_country')</code></small>

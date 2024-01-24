@@ -1,7 +1,10 @@
 <x-tomato-admin-container label="{{trans('tomato-admin::global.crud.edit')}} {{__('Country')}} #{{$model->id}}">
     <x-splade-form class="flex flex-col space-y-4" action="{{route('admin.countries.update', $model->id)}}" method="post" :default="$model">
 
-          <x-splade-input :label="__('Name')" name="name" type="text"  :placeholder="__('Name')" />
+
+        <x-tomato-translation name="translations" :label="__('Translations')" :placeholder="__('Translations')"/>
+
+        <x-splade-input :label="__('Name')" name="name" type="text"  :placeholder="__('Name')" />
           <x-splade-input :label="__('Code')" name="code" type="text"  :placeholder="__('Code')" />
           <x-splade-input :label="__('Phone')" :placeholder="__('Phone')" type='tel' name="phone" />
           <x-splade-input :label="__('Lat')" name="lat" type="number"  :placeholder="__('Lat')" />

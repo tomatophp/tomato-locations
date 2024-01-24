@@ -4,6 +4,7 @@
         <x-splade-select remote-url="/admin/countries/api" remote-root="data" option-label="name" option-value="id"  name="country_id" label="{{__('Country')}}" choices/>
         <x-splade-select v-bind:disabled="!form.country_id" remote-url="`/admin/cities/api?country_id=${form.country_id}`" remote-root="data" option-label="name" option-value="id"  name="city_id" label="{{trans('tomato-locations::global.area.city')}}" choices/>
 
+        <x-tomato-translation name="translations" :label="__('Translations')" :placeholder="__('Translations')"/>
 
         <x-splade-input name="name" label="{{__('Name')}}" type="text"  placeholder="{{trans('tomato-locations::global.area.name')}}" />
 

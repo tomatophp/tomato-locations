@@ -12,6 +12,8 @@
             option-value="id"
         />
 
+        <x-tomato-translation name="translations" :label="__('Translations')" :placeholder="__('Translations')"/>
+
           <x-splade-input :label="__('Name')" name="name" type="text"  :placeholder="__('Name')" />
 
         <x-splade-input :label="__('Lat')" name="lat" type="number"  :placeholder="__('Lat')" />

@@ -2,6 +2,9 @@
     <x-slot:header>
         {{ __('Languages') }}
     </x-slot:header>
+    <x-slot:icon>
+        bx bx-globe
+    </x-slot:icon>
     <x-slot:buttons>
         <x-tomato-admin-button :modal="true" :href="route('admin.languages.create')" type="link">
             {{trans('tomato-admin::global.crud.create-new')}} {{__('Language')}}

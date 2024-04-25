@@ -11,6 +11,8 @@ use TomatoPHP\TomatoPHP\Services\Menu\TomatoMenuRegister;
 use TomatoPHP\TomatoRoles\Services\Permission;
 use TomatoPHP\TomatoRoles\Services\TomatoRoles;
 use TomatoPHP\TomatoAdmin\Services\Contracts\Menu;
+use TomatoPHP\TomatoSettings\Facades\TomatoSettings;
+use TomatoPHP\TomatoSettings\Services\Contracts\SettingHold;
 
 
 class TomatoLocationsServiceProvider extends ServiceProvider
@@ -91,38 +93,51 @@ class TomatoLocationsServiceProvider extends ServiceProvider
 
     protected function bootMenu(): void
     {
-        TomatoMenu::register([
-                Menu::make()
-                    ->group(__('Locations'))
-                    ->label(trans('tomato-locations::global.country.title'))
-                    ->icon("bx bxs-flag")
-                    ->route("admin.countries.index"),
-                Menu::make()
-                    ->group(__('Locations'))
-                    ->label(trans('tomato-locations::global.city.title'))
-                    ->icon("bx bxs-city")
-                    ->route("admin.cities.index"),
-                Menu::make()
-                    ->group(__('Locations'))
-                    ->label(trans('tomato-locations::global.area.title'))
-                    ->icon("bx bxs-map")
-                    ->route("admin.areas.index"),
-                Menu::make()
-                    ->group(__('Locations'))
-                    ->label(trans('tomato-locations::global.language.title'))
-                    ->icon("bx bx-globe")
-                    ->route("admin.languages.index"),
-                Menu::make()
-                    ->group(__('Locations'))
-                    ->label(trans('tomato-locations::global.currency.title'))
-                    ->icon("bx bx-money")
-                    ->route("admin.currencies.index"),
-                Menu::make()
-                    ->group(__('Locations'))
-                    ->label(trans('tomato-locations::global.settings.title'))
-                    ->icon("bx bxs-cog")
-                    ->route("admin.settings.locations.index")
-            ]
-        );
+        $menu = [];
+        if(config('tomato-locations.menu.country')) {
+            $menu[] = Menu::make()
+                ->group(__('Locations'))
+                ->label(trans('tomato-locations::global.country.title'))
+                ->icon("bx bxs-flag")
+                ->route("admin.countries.index");
+        }
+        if (config('tomato-locations.menu.city')) {
+            $menu[] = Menu::make()
+                ->group(__('Locations'))
+                ->label(trans('tomato-locations::global.city.title'))
+                ->icon("bx bxs-city")
+                ->route("admin.cities.index");
+        }
+        if (config('tomato-locations.menu.area')) {
+            $menu[] = Menu::make()
+                ->group(__('Locations'))
+                ->label(trans('tomato-locations::global.area.title'))
+                ->icon("bx bxs-map")
+                ->route("admin.areas.index");
+        }
+        if(config('tomato-locations.menu.language')) {
+            $menu[] = Menu::make()
+                ->group(__('Locations'))
+                ->label(trans('tomato-locations::global.language.title'))
+                ->icon("bx bx-globe")
+                ->route("admin.languages.index");
+        }
+        if (config('tomato-locations.menu.currency')) {
+            $menu[] = Menu::make()
+                ->group(__('Locations'))
+                ->label(trans('tomato-locations::global.currency.title'))
+                ->icon("bx bx-money")
+                ->route("admin.currencies.index");
+        }
+        TomatoMenu::register($menu);
+
+        TomatoSettings::register([
+            SettingHold::make()
+                ->label(__('Location Settings'))
+                ->icon('bx bx-map')
+                ->route('admin.settings.locations.index')
+                ->description(__('Manage your location language, currency, and other settings.'))
+                ->group(__('Services'))
+        ]);
     }
 }

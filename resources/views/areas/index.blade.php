@@ -2,7 +2,9 @@
     <x-slot:header name="header">
         {{trans('tomato-locations::global.area.title')}}
     </x-slot:header>
-
+    <x-slot:icon>
+        bx bxs-map
+    </x-slot:icon>
     <x-slot:buttons>
         <x-tomato-admin-button :modal="true" :href="route('admin.areas.create')" type="link">
             {{trans('tomato-admin::global.crud.create-new')}} {{__('Area')}}

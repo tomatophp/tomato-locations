@@ -2,6 +2,9 @@
     <x-slot:header>
         {{ __('Countries') }}
     </x-slot:header>
+    <x-slot:icon>
+        bx bxs-flag
+    </x-slot:icon>
     <x-slot:buttons>
         <x-tomato-admin-button :modal="true" :href="route('admin.countries.create')" type="link">
             {{trans('tomato-admin::global.crud.create-new')}} {{__('Country')}}

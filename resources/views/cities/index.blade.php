@@ -2,6 +2,9 @@
     <x-slot:header>
         {{ __('Cities') }}
     </x-slot:header>
+    <x-slot:icon>
+        bx bxs-city
+    </x-slot:icon>
     <x-slot:buttons>
         <x-tomato-admin-button :modal="true" :href="route('admin.cities.create')" type="link">
             {{trans('tomato-admin::global.crud.create-new')}} {{__('City')}}

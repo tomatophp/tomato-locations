@@ -2,6 +2,9 @@
     <x-slot:header>
         {{ __('Currencies') }}
     </x-slot:header>
+    <x-slot:icon>
+        bx bx-money
+    </x-slot:icon>
     <x-slot:buttons>
         <x-tomato-admin-button :modal="true" :href="route('admin.currencies.create')" type="link">
             {{trans('tomato-admin::global.crud.create-new')}} {{__('Currency')}}

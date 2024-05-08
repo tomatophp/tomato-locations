@@ -2,7 +2,7 @@
 
 
 
-Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function () {
+Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
     Route::get('admin/countries', [\TomatoPHP\TomatoLocations\Http\Controllers\CountryController::class, 'index'])->name('countries.index');
     Route::get('admin/countries/api', [\TomatoPHP\TomatoLocations\Http\Controllers\CountryController::class, 'api'])->name('countries.api');
     Route::get('admin/countries/create', [\TomatoPHP\TomatoLocations\Http\Controllers\CountryController::class, 'create'])->name('countries.create');
@@ -13,7 +13,7 @@ Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function
     Route::delete('admin/countries/{model}', [\TomatoPHP\TomatoLocations\Http\Controllers\CountryController::class, 'destroy'])->name('countries.destroy');
 });
 
-Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function () {
+Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
     Route::get('admin/cities', [\TomatoPHP\TomatoLocations\Http\Controllers\CityController::class, 'index'])->name('cities.index');
     Route::get('admin/cities/api', [\TomatoPHP\TomatoLocations\Http\Controllers\CityController::class, 'api'])->name('cities.api');
     Route::get('admin/cities/create', [\TomatoPHP\TomatoLocations\Http\Controllers\CityController::class, 'create'])->name('cities.create');
@@ -24,7 +24,7 @@ Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function
     Route::delete('admin/cities/{model}', [\TomatoPHP\TomatoLocations\Http\Controllers\CityController::class, 'destroy'])->name('cities.destroy');
 });
 
-Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function () {
+Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
     Route::get('admin/areas', [\TomatoPHP\TomatoLocations\Http\Controllers\AreaController::class, 'index'])->name('areas.index');
     Route::get('admin/areas/api', [\TomatoPHP\TomatoLocations\Http\Controllers\AreaController::class, 'api'])->name('areas.api');
     Route::get('admin/areas/create', [\TomatoPHP\TomatoLocations\Http\Controllers\AreaController::class, 'create'])->name('areas.create');
@@ -35,7 +35,7 @@ Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function
     Route::delete('admin/areas/{model}', [\TomatoPHP\TomatoLocations\Http\Controllers\AreaController::class, 'destroy'])->name('areas.destroy');
 });
 
-Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function () {
+Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
     Route::get('admin/currencies', [\TomatoPHP\TomatoLocations\Http\Controllers\CurrencyController::class, 'index'])->name('currencies.index');
     Route::get('admin/currencies/api', [\TomatoPHP\TomatoLocations\Http\Controllers\CurrencyController::class, 'api'])->name('currencies.api');
     Route::get('admin/currencies/create', [\TomatoPHP\TomatoLocations\Http\Controllers\CurrencyController::class, 'create'])->name('currencies.create');
@@ -46,7 +46,7 @@ Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function
     Route::delete('admin/currencies/{model}', [\TomatoPHP\TomatoLocations\Http\Controllers\CurrencyController::class, 'destroy'])->name('currencies.destroy');
 });
 
-Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function () {
+Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->name('admin.')->group(function () {
     Route::get('admin/languages', [\TomatoPHP\TomatoLocations\Http\Controllers\LanguageController::class, 'index'])->name('languages.index');
     Route::get('admin/languages/api', [\TomatoPHP\TomatoLocations\Http\Controllers\LanguageController::class, 'api'])->name('languages.api');
     Route::get('admin/languages/create', [\TomatoPHP\TomatoLocations\Http\Controllers\LanguageController::class, 'create'])->name('languages.create');
@@ -58,7 +58,7 @@ Route::middleware(['web', 'splade', 'verified'])->name('admin.')->group(function
 });
 
 
-Route::middleware(['web', 'splade', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(array_merge(['splade', 'auth'], config('tomato-admin.route_middlewares')))->prefix('admin')->name('admin.')->group(function () {
     Route::get('/settings/locations', [\TomatoPHP\TomatoLocations\Http\Controllers\LocationSettingsController::class, 'index'])->name('settings.locations.index');
     Route::post('/settings/locations', [\TomatoPHP\TomatoLocations\Http\Controllers\LocationSettingsController::class, 'store'])->name('settings.locations.store');
 });
